@@ -1,6 +1,6 @@
 import './Home.css';
 import React, { useState, useEffect, useRef } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import './GeneticAssessmentAI.css';
 
 /* ─── Footer Component (matches About.js pattern) ─────────────────────────── */
@@ -377,18 +377,12 @@ const GeneticAssessmentAI = () => {
 
   // Derived state
   const hasProfile = !!patientData;
-  const hasAgents = agentResults && Object.keys(agentResults).length > 0;
-  const agentCount = hasAgents ? Object.keys(agentResults).length : 0;
   const firstName = patientData?.fullName?.split(' ')[0] || patientData?.firstName || '';
 
   const openBotpress = () => {
     if (window.botpress) {
       window.botpress.open();
     }
-  };
-
-  const scrollToSection = (id) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (

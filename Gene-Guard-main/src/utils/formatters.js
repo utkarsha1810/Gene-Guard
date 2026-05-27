@@ -119,7 +119,7 @@ export const getErrorMessage = (error) => {
   return 'An unknown error occurred';
 };
 
-export default {
+const formatters = {
   formatDate,
   formatTimeAgo,
   capitalize,
@@ -129,3 +129,5 @@ export default {
   isEmpty,
   getErrorMessage,
 };
+
+export default formatters;

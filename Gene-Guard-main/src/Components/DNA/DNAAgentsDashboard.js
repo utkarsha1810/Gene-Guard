@@ -11,7 +11,6 @@ import {
   evaluatePatient,
   getAgentById,
   runAgent,
-  titleCase,
 } from '../../data/dnaAgents';
 import { callGeminiDirect, isGeminiAvailable } from '../../services/geminiDirectService';
 import { parseMarkdown } from '../../utils/formatters';
@@ -40,13 +39,6 @@ const defaultPatient = {
   consultedDoctor: 'No',
   medications: '',
 };
-
-const defaultValuesFor = (agent, patient = defaultPatient) =>
-  agent.inputs.reduce((acc, input) => {
-    const incoming = patient[input.name];
-    acc[input.name] = incoming || (input.type === 'select' ? input.options[0] : '');
-    return acc;
-  }, {});
 
 const emptyValuesFor = (agent) =>
   agent.inputs.reduce((acc, input) => {
@@ -109,13 +101,14 @@ const TrendChart = ({ series }) => {
   );
 };
 
+const rotatingLoaderMessages = ['Analyzing your inputs...', 'Consulting AI...', 'Preparing results...'];
+
 const RotatingLoader = () => {
-  const messages = ['Analyzing your inputs...', 'Consulting AI...', 'Preparing results...'];
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setIndex((prev) => (prev + 1) % messages.length);
+      setIndex((prev) => (prev + 1) % rotatingLoaderMessages.length);
     }, 2000);
     return () => clearInterval(interval);
   }, []);
