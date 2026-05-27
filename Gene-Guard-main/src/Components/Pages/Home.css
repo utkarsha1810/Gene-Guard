@@ -281,6 +281,12 @@
   transform: translateY(-1px);
 }
 
+.home-nav-link.active {
+  color: #4ade80;
+  font-weight: 700;
+  opacity: 1;
+}
+
 /* --- Profile & Dropdown Styles --- */
 .home-nav-right-section {
   display: flex;

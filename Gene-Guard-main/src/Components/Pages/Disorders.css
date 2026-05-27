@@ -96,7 +96,7 @@ body {
   background-blend-mode: overlay;
   display: flex;
   align-items: center;
-  padding: var(--spacing-xxl) var(--spacing-lg);
+  padding: 130px var(--spacing-lg) var(--spacing-lg);
   position: relative;
   overflow: hidden;
   border-radius: 0 0 var(--radius-xl) var(--radius-xl);
@@ -1181,4 +1181,27 @@ body {
 .modal-content::-webkit-scrollbar-thumb:active,
 .symptom-modal::-webkit-scrollbar-thumb:active {
   background: var(--primary-brown);
+}
+
+/* Custom navbar and page container overrides for disorders page wrapper */
+.disorders-page-wrapper .home-main-navbar {
+  background: rgba(15, 23, 42, 0.95);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(46, 125, 50, 0.2);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.15);
+  padding: 0.75rem 0;
+}
+
+.disorders-page-wrapper .home-navbar-scrolled {
+  padding: 0.75rem 0;
+  background: rgba(15, 23, 42, 0.98);
+  border-bottom: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+.disorders-page-wrapper .home-biotech-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-light); /* keep light background for disorders page content */
 }

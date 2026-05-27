@@ -1,7 +1,317 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
 import './Disorders.css';
+import './Home.css';
+
+// Translation data for Navbar & Footer
+const translations = {
+  en: {
+    navLinks: {
+      learnGenetics: 'Learn Genetics',
+      geneticDisorders: 'Genetic Disorders',
+      counselling: 'Counselling',
+      geneticAssessment: 'Genetic Assessment AI',
+      dnaTesting: 'DNA Testing',
+      aboutUs: 'About Us',
+      login: 'Login',
+      signup: 'Sign Up'
+    },
+    footer: {
+      tagline: 'Empowering genetic awareness through accessible education, advanced AI assessment, and personalized insights.',
+      platform: 'PLATFORM',
+      services: 'SERVICES',
+      company: 'COMPANY',
+      legal: 'LEGAL',
+      learnGenetics: 'Learn Genetics',
+      geneticDisorders: 'Genetic Disorders',
+      geneticCounseling: 'Genetic Counseling',
+      aiAssessment: 'AI Assessment',
+      dnaTesting: 'DNA Testing',
+      reportsInsights: 'Reports & Insights',
+      consultations: 'Consultations',
+      research: 'Research',
+      aboutUs: 'About Us',
+      ourTeam: 'Our Team',
+      careers: 'Careers',
+      contact: 'Contact',
+      privacyPolicy: 'Privacy Policy',
+      termsOfService: 'Terms of Service',
+      hipaaCompliance: 'HIPAA Compliance',
+      cookiePolicy: 'Cookie Policy',
+      copyright: '© 2026 GeneGuard. All rights reserved.',
+    }
+  },
+  hi: {
+    navLinks: {
+      learnGenetics: 'आनुवंशिकी सीखें',
+      geneticDisorders: 'आनुवंशिक विकार',
+      counselling: 'परामर्श',
+      geneticAssessment: 'आनुवंशिक मूल्यांकन AI',
+      dnaTesting: 'DNA परीक्षण',
+      aboutUs: 'हमारे बारे में',
+      login: 'लॉगिन',
+      signup: 'साइन अप'
+    },
+    footer: {
+      tagline: 'सुलभ शिक्षा, उन्नत AI मूल्यांकन और व्यक्तिगत अंतर्दृष्टि के माध्यम से आनुवंशिक जागरूकता को सशक्त बनाना।',
+      platform: 'प्लेटफ़ॉर्म', services: 'सेवाएं', company: 'कंपनी', legal: 'कानूनी',
+      learnGenetics: 'आनुवंशिकी सीखें', geneticDisorders: 'आनुवंशिक विकार',
+      geneticCounseling: 'आनुवंशिक परामर्श', aiAssessment: 'AI मूल्यांकन',
+      dnaTesting: 'DNA परीक्षण', reportsInsights: 'रिपोर्ट और अंतर्दृष्टि',
+      consultations: 'परामर्श', research: 'अनुसंधान',
+      aboutUs: 'हमारे बारे में', ourTeam: 'हमारी टीम', careers: 'करियर', contact: 'संपर्क',
+      privacyPolicy: 'गोपनीयता नीति', termsOfService: 'सेवा की शर्तें',
+      hipaaCompliance: 'HIPAA अनुपालन', cookiePolicy: 'कुकी नीति',
+      copyright: '© 2026 GeneGuard. सर्वाधिकार सुरक्षित।',
+    }
+  },
+  mr: {
+    navLinks: {
+      learnGenetics: 'अनुवांशिकी शिका',
+      geneticDisorders: 'अनुवांशिक विकार',
+      counselling: 'समुपदेशन',
+      geneticAssessment: 'अनुवांशिक मूल्यांकन AI',
+      dnaTesting: 'DNA चाचणी',
+      aboutUs: 'आमच्याबद्दल',
+      login: 'लॉगिन',
+      signup: 'साइन अप'
+    },
+    footer: {
+      tagline: 'सुलभ शिक्षण, प्रगत AI मूल्यमापन आणि वैयक्तिक अंतर्दृष्टीद्वारे अनुवांशिक जागरूकता सशक्त करणे.',
+      platform: 'प्लॅटफॉर्म', services: 'सेवा', company: 'कंपनी', legal: 'कायदेशीर',
+      learnGenetics: 'अनुवंशशास्त्र शिका', geneticDisorders: 'अनुवांशिक विकार',
+      geneticCounseling: 'अनुवांशिक समुपदेशन', aiAssessment: 'AI मूल्यमापन',
+      dnaTesting: 'DNA चाचणी', reportsInsights: 'अहवाल आणि अंतर्दृष्टी',
+      consultations: 'सल्लामसलत', research: 'संशोधन',
+      aboutUs: 'आमच्याबद्दल', ourTeam: 'आमची टीम', careers: 'करिअर', contact: 'संपर्क',
+      privacyPolicy: 'गोपनीयता धोरण', termsOfService: 'सेवेच्या अटी',
+      hipaaCompliance: 'HIPAA अनुपालन', cookiePolicy: 'कुकी धोरण',
+      copyright: '© 2026 GeneGuard. सर्व हक्क राखीव.',
+    }
+  },
+  te: {
+    navLinks: {
+      learnGenetics: 'జన్యుశాస్త్రం నేర్చుకోండి',
+      geneticDisorders: 'జన్యు రుగ్మతలు',
+      counselling: 'కౌన్సెలింగ్',
+      geneticAssessment: 'జన్యు అంచనా AI',
+      dnaTesting: 'DNA పరీక్ష',
+      aboutUs: 'మా గురించి',
+      login: 'లాగిన్',
+      signup: 'సైన్ అప్'
+    },
+    footer: {
+      tagline: 'అందుబాటులో ఉన్న విద్య, అధునాతన AI మూల్యాంకనం మరియు వ్యక్తిగత అంతర్దృష్టుల ద్వారా జన్యు అవగాహనను శక్తివంతం చేయడం.',
+      platform: 'ప్లాట్‌ఫారమ్', services: 'సేవలు', company: 'కంపెనీ', legal: 'చట్టపరమైన',
+      learnGenetics: 'జెనెటిక్స్ నేర్చుకోండి', geneticDisorders: 'జన్యు వ్యాధులు',
+      geneticCounseling: 'జన్యు కౌన్సెలింగ్', aiAssessment: 'AI మూల్యాంకనం',
+      dnaTesting: 'DNA పరీక్ష', reportsInsights: 'నివేదికలు & అంతర్దృష్టి',
+      consultations: 'సంప్రదింపులు', research: 'పరిశోధన',
+      aboutUs: 'మా గురించి', ourTeam: 'మా బృందం', careers: 'కెరీర్లు', contact: 'సంప్రదించండి',
+      privacyPolicy: 'గోప్యాతా విధానం', termsOfService: 'సేవా నిబంధనలు',
+      hipaaCompliance: 'HIPAA అనుసరణ', cookiePolicy: 'కుకీ విధానం',
+      copyright: '© 2026 GeneGuard. అన్ని హక్కులు రిజర్వ్ చేయబడ్డాయి.',
+    }
+  }
+};
+
+// ─── Navbar ───────────────────────────────────────────────────────────────────
+const Navbar = ({ language, setLanguage }) => {
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isProfileOpen, setIsProfileOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const dropdownRef = useRef(null);
+
+  const t = translations[language];
+
+  useEffect(() => {
+    const handleScroll = () => setIsScrolled(window.scrollY > 20);
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsProfileOpen(false);
+      }
+    };
+    window.addEventListener('scroll', handleScroll);
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => { document.body.style.overflow = ''; };
+  }, [isMobileMenuOpen]);
+
+  const handleLinkClick = () => setIsMobileMenuOpen(false);
+
+  return (
+    <>
+      <nav className={`home-main-navbar ${isScrolled ? 'home-navbar-scrolled' : ''}`}>
+        <div className="home-nav-content">
+          <Link to="/" className="home-nav-logo" style={{ textDecoration: 'none' }}>
+            <div className="home-logo-circle"></div>
+            <span className="home-logo-brand">Gene Guard</span>
+          </Link>
+
+          <div className="home-nav-right-section">
+            <div className="home-nav-links">
+              <Link to="/learn-genetics" className="home-nav-link">{t.navLinks.learnGenetics}</Link>
+              <Link to="/genetic-disorders" className="home-nav-link active">{t.navLinks.geneticDisorders}</Link>
+              <Link to="/counselling" className="home-nav-link">{t.navLinks.counselling}</Link>
+              <Link to="/genetic-assessment" className="home-nav-link">{t.navLinks.geneticAssessment}</Link>
+              <Link to="/dna" className="home-nav-link">{t.navLinks.dnaTesting}</Link>
+              <Link to="/about" className="home-nav-link">{t.navLinks.aboutUs}</Link>
+            </div>
+
+            <div className="home-language-buttons">
+              <button className={`home-lang-btn ${language === 'en' ? 'active' : ''}`} onClick={() => setLanguage('en')}>EN</button>
+              <button className={`home-lang-btn ${language === 'hi' ? 'active' : ''}`} onClick={() => setLanguage('hi')}>हिं</button>
+              <button className={`home-lang-btn ${language === 'mr' ? 'active' : ''}`} onClick={() => setLanguage('mr')}>मर</button>
+              <button className={`home-lang-btn ${language === 'te' ? 'active' : ''}`} onClick={() => setLanguage('te')}>తె</button>
+            </div>
+
+            <button
+              className={`home-hamburger-menu ${isMobileMenuOpen ? 'active' : ''}`}
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              aria-label="Toggle Menu"
+            >
+              <span className="home-hamburger-line"></span>
+              <span className="home-hamburger-line"></span>
+              <span className="home-hamburger-line"></span>
+            </button>
+
+            <div className="home-profile-container" ref={dropdownRef}>
+              <button
+                className={`home-profile-trigger ${isProfileOpen ? 'active' : ''}`}
+                onClick={() => setIsProfileOpen(!isProfileOpen)}
+                aria-label="User Profile"
+              >
+                <svg className="home-profile-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" />
+                </svg>
+              </button>
+              {isProfileOpen && (
+                <div className="home-profile-dropdown">
+                  <div className="home-dropdown-glow"></div>
+                  <Link to="/login" className="home-dropdown-item home-signup-special">{t.navLinks.login}</Link>
+                  <Link to="/register" className="home-dropdown-item home-signup-special">{t.navLinks.signup}</Link>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      {isMobileMenuOpen && (
+        <div className="home-mobile-menu-overlay">
+          <Link to="/learn-genetics" className="home-nav-link" onClick={handleLinkClick}>{t.navLinks.learnGenetics}</Link>
+          <Link to="/genetic-disorders" className="home-nav-link active" onClick={handleLinkClick}>{t.navLinks.geneticDisorders}</Link>
+          <Link to="/counselling" className="home-nav-link" onClick={handleLinkClick}>{t.navLinks.counselling}</Link>
+          <Link to="/genetic-assessment" className="home-nav-link" onClick={handleLinkClick}>{t.navLinks.geneticAssessment}</Link>
+          <Link to="/dna" className="home-nav-link" onClick={handleLinkClick}>{t.navLinks.dnaTesting}</Link>
+          <Link to="/about" className="home-nav-link" onClick={handleLinkClick}>{t.navLinks.aboutUs}</Link>
+        </div>
+      )}
+    </>
+  );
+};
+
+// ─── Footer ───────────────────────────────────────────────────────────────────
+const Footer = ({ language }) => {
+  const tf = translations[language].footer;
+
+  return (
+    <footer className="home-footer">
+      <div className="home-footer-container">
+        {/* Top: brand + links */}
+        <div className="home-footer-top">
+          {/* Brand */}
+          <div className="home-footer-brand">
+            <div className="home-footer-logo">
+              <div className="home-footer-logo-circle"></div>
+              <span className="home-footer-logo-text">GeneGuard</span>
+            </div>
+            <p className="home-footer-tagline">{tf.tagline}</p>
+            <div className="home-footer-social">
+              <a href="https://twitter.com" className="home-social-link" aria-label="Twitter" target="_blank" rel="noreferrer">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                </svg>
+              </a>
+              <a href="https://linkedin.com" className="home-social-link" aria-label="LinkedIn" target="_blank" rel="noreferrer">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                </svg>
+              </a>
+              <a href="https://github.com" className="home-social-link" aria-label="GitHub" target="_blank" rel="noreferrer">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+
+          {/* Links grid — 4 columns */}
+          <div className="home-footer-links-grid">
+            <div className="home-footer-col">
+              <h4 className="home-footer-col-title">{tf.platform}</h4>
+              <ul className="home-footer-ul">
+                <li><Link to="/learn-genetics">{tf.learnGenetics}</Link></li>
+                <li><Link to="/genetic-disorders">{tf.geneticDisorders}</Link></li>
+                <li><Link to="/counselling">{tf.geneticCounseling}</Link></li>
+                <li><Link to="/genetic-assessment">{tf.aiAssessment}</Link></li>
+              </ul>
+            </div>
+            <div className="home-footer-col">
+              <h4 className="home-footer-col-title">{tf.services}</h4>
+              <ul className="home-footer-ul">
+                <li><Link to="/dna">{tf.dnaTesting}</Link></li>
+                <li><Link to="/genetic-assessment">{tf.reportsInsights}</Link></li>
+                <li><Link to="/counselling">{tf.consultations}</Link></li>
+                <li><Link to="/learn-genetics">{tf.research}</Link></li>
+              </ul>
+            </div>
+            <div className="home-footer-col">
+              <h4 className="home-footer-col-title">{tf.company}</h4>
+              <ul className="home-footer-ul">
+                <li><Link to="/about">{tf.aboutUs}</Link></li>
+                <li><Link to="/about">{tf.ourTeam}</Link></li>
+                <li><Link to="/about">{tf.careers}</Link></li>
+                <li><Link to="/about">{tf.contact}</Link></li>
+              </ul>
+            </div>
+            <div className="home-footer-col">
+              <h4 className="home-footer-col-title">{tf.legal}</h4>
+              <ul className="home-footer-ul">
+                <li><Link to="/about">{tf.privacyPolicy}</Link></li>
+                <li><Link to="/about">{tf.termsOfService}</Link></li>
+                <li><Link to="/dna">{tf.hipaaCompliance}</Link></li>
+                <li><Link to="/about">{tf.cookiePolicy}</Link></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        {/* Divider */}
+        <div className="home-footer-divider" />
+
+        {/* Bottom: copyright */}
+        <div className="home-footer-bottom">
+          <p className="home-footer-copyright">{tf.copyright}</p>
+        </div>
+      </div>
+    </footer>
+  );
+};
 
 const Disorders = () => {
+  const [language, setLanguage] = useState('en');
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [showSymptomChecker, setShowSymptomChecker] = useState(false);
   const [currentStep, setCurrentStep] = useState(1);
@@ -259,7 +569,10 @@ const Disorders = () => {
   };
 
   return (
-    <div className="disorders-container">
+    <div className="disorders-page-wrapper">
+      <Navbar language={language} setLanguage={setLanguage} />
+      <div className="home-biotech-container">
+        <div className="disorders-container">
       {/* Hero Section */}
       <section className="hero-section">
         <div className="hero-content">
@@ -502,6 +815,9 @@ const Disorders = () => {
           </div>
         </div>
       )}
+        </div>
+        <Footer language={language} />
+      </div>
     </div>
   );
 };

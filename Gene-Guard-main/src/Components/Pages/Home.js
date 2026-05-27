@@ -319,9 +319,9 @@ const Navbar = ({ language, setLanguage }) => {
         <div className="home-mobile-menu-overlay">
           <Link to="/learn-genetics" className="home-nav-link" onClick={handleLinkClick}>{t.navLinks.learnGenetics}</Link>
           <Link to="/genetic-disorders" className="home-nav-link" onClick={handleLinkClick}>{t.navLinks.geneticDisorders}</Link>
-          <Link to="/genetic-counseling" className="home-nav-link" onClick={handleLinkClick}>{t.navLinks.counselling}</Link>
+          <Link to="/counselling" className="home-nav-link" onClick={handleLinkClick}>{t.navLinks.counselling}</Link>
           <Link to="/genetic-assessment" className="home-nav-link" onClick={handleLinkClick}>{t.navLinks.geneticAssessment}</Link>
-          <Link to="/dna-testing" className="home-nav-link" onClick={handleLinkClick}>{t.navLinks.dnaTesting}</Link>
+          <Link to="/dna" className="home-nav-link" onClick={handleLinkClick}>{t.navLinks.dnaTesting}</Link>
           <Link to="/about" className="home-nav-link" onClick={handleLinkClick}>{t.navLinks.aboutUs}</Link>
         </div>
       )}
@@ -509,27 +509,27 @@ const Footer = ({ language }) => {
               <h4 className="home-footer-col-title">{tf.services}</h4>
               <ul className="home-footer-ul">
                 <li><Link to="/dna">{tf.dnaTesting}</Link></li>
-                <li><a href="#reports">{tf.reportsInsights}</a></li>
-                <li><a href="#consultations">{tf.consultations}</a></li>
-                <li><a href="#research">{tf.research}</a></li>
+                <li><Link to="/genetic-assessment">{tf.reportsInsights}</Link></li>
+                <li><Link to="/counselling">{tf.consultations}</Link></li>
+                <li><Link to="/learn-genetics">{tf.research}</Link></li>
               </ul>
             </div>
             <div className="home-footer-col">
               <h4 className="home-footer-col-title">{tf.company}</h4>
               <ul className="home-footer-ul">
                 <li><Link to="/about">{tf.aboutUs}</Link></li>
-                <li><a href="#team">{tf.ourTeam}</a></li>
-                <li><a href="#careers">{tf.careers}</a></li>
-                <li><a href="#contact">{tf.contact}</a></li>
+                <li><Link to="/about">{tf.ourTeam}</Link></li>
+                <li><Link to="/about">{tf.careers}</Link></li>
+                <li><Link to="/about">{tf.contact}</Link></li>
               </ul>
             </div>
             <div className="home-footer-col">
               <h4 className="home-footer-col-title">{tf.legal}</h4>
               <ul className="home-footer-ul">
-                <li><a href="#privacy">{tf.privacyPolicy}</a></li>
-                <li><a href="#terms">{tf.termsOfService}</a></li>
-                <li><a href="#hipaa">{tf.hipaaCompliance}</a></li>
-                <li><a href="#cookies">{tf.cookiePolicy}</a></li>
+                <li><Link to="/about">{tf.privacyPolicy}</Link></li>
+                <li><Link to="/about">{tf.termsOfService}</Link></li>
+                <li><Link to="/dna">{tf.hipaaCompliance}</Link></li>
+                <li><Link to="/about">{tf.cookiePolicy}</Link></li>
               </ul>
             </div>
           </div>

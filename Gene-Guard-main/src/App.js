@@ -9,6 +9,7 @@ import Register from "./Components/Auth/Register";
 import DNAAgentsDashboard from "./Components/DNA/DNAAgentsDashboard";
 import PatientDNAIntake from "./Components/DNA/PatientDNAIntake";
 import GeneticAssessmentAI from "./Components/Pages/GeneticAssessmentAI";
+import Disorders from "./Components/Pages/Disorders";
 function App() {
   return (
     <BrowserRouter>
@@ -16,6 +17,7 @@ function App() {
         <Route path="/" element={<Home />}/>
         <Route path="/learn-genetics" element={<LearnGenetics />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/signup" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/dna" element={<DNA />} />
         <Route path="/dna/agents/:agentId" element={<DNAAgentsDashboard />} />
@@ -25,6 +27,7 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/counselling" element={<Counselling />} />
         <Route path="/genetic-assessment" element={<GeneticAssessmentAI />} />
+        <Route path="/genetic-disorders" element={<Disorders />} />
       
       </Routes>
     </BrowserRouter>

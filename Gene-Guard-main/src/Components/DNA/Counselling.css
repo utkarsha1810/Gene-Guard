@@ -18,6 +18,7 @@
   font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
   color: #2C3E50;
   background-color: #F8FAFB;
+  padding-top: 72px; /* Push content down below fixed navbar */
 }
 
 .counselling-page-wrapper .counselling-container {

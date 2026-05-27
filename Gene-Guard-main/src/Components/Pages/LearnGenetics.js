@@ -478,27 +478,27 @@ const Footer = ({ t }) => {
               <h3 className="footer-column-title">{t('footer_services')}</h3>
               <ul className="footer-links">
                 <li><Link to="/dna">{t('footer_dna')}</Link></li>
-                <li><a href="#reports">{t('footer_reports')}</a></li>
-                <li><a href="#consultation">{t('footer_consultations')}</a></li>
-                <li><a href="#research">{t('footer_research')}</a></li>
+                <li><Link to="/genetic-assessment">{t('footer_reports')}</Link></li>
+                <li><Link to="/counselling">{t('footer_consultations')}</Link></li>
+                <li><Link to="/learn-genetics">{t('footer_research')}</Link></li>
               </ul>
             </div>
             <div className="footer-column">
               <h3 className="footer-column-title">{t('footer_company')}</h3>
               <ul className="footer-links">
                 <li><Link to="/about">{t('footer_about')}</Link></li>
-                <li><a href="#team">{t('footer_team')}</a></li>
-                <li><a href="#careers">{t('footer_careers')}</a></li>
-                <li><a href="#contact">{t('footer_contact')}</a></li>
+                <li><Link to="/about">{t('footer_team')}</Link></li>
+                <li><Link to="/about">{t('footer_careers')}</Link></li>
+                <li><Link to="/about">{t('footer_contact')}</Link></li>
               </ul>
             </div>
             <div className="footer-column">
               <h3 className="footer-column-title">{t('footer_legal')}</h3>
               <ul className="footer-links">
-                <li><a href="#privacy">{t('footer_privacy')}</a></li>
-                <li><a href="#terms">{t('footer_terms')}</a></li>
-                <li><a href="#hipaa">{t('footer_hipaa')}</a></li>
-                <li><a href="#cookies">{t('footer_cookies')}</a></li>
+                <li><Link to="/about">{t('footer_privacy')}</Link></li>
+                <li><Link to="/about">{t('footer_terms')}</Link></li>
+                <li><Link to="/dna">{t('footer_hipaa')}</Link></li>
+                <li><Link to="/about">{t('footer_cookies')}</Link></li>
               </ul>
             </div>
           </div>

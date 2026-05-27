@@ -4,7 +4,7 @@ import { Calendar, Clock, ChevronDown, ChevronUp, Heart, Users, Baby, Dna, FileT
 import './Counselling.css';
 
 const translations = {
-  eng: {
+  en: {
     nav_counselling: 'Counselling',
     hero_title: 'Your Journey to Understanding',
     hero_title_accent: 'Genetic Health',
@@ -102,9 +102,11 @@ const translations = {
     footer_cookie_policy: 'Cookie Policy',
     footer_tagline: 'Empowering genetic awareness through accessible education, advanced AI assessment, and personalized insights.',
     footer_copyright: '© 2026 GeneGuard. All rights reserved.',
+    login: 'Login',
+    signup: 'Sign Up',
   },
 
-  hin: {
+  hi: {
     nav_counselling: 'परामर्श',
     hero_title: 'आपकी यात्रा समझने की ओर',
     hero_title_accent: 'आनुवंशिक स्वास्थ्य',
@@ -202,10 +204,12 @@ const translations = {
     footer_cookie_policy: 'कुकी नीति',
     footer_tagline: 'सुलभ शिक्षा, उन्नत AI मूल्यांकन और व्यक्तिगत जानकारी के माध्यम से आनुवंशिक जागरूकता को सशक्त बनाना।',
     footer_copyright: '© 2026 GeneGuard। सर्वाधिकार सुरक्षित।',
+    login: 'लॉगिन',
+    signup: 'साइन अप',
   },
 
   // ── मराठी (Marathi) ──────────────────────────────────────────────────────────
-  mar: {
+  mr: {
     nav_counselling: 'समुपदेशन',
     hero_title: 'समजून घेण्याच्या दिशेने तुमचा प्रवास',
     hero_title_accent: 'अनुवांशिक आरोग्य',
@@ -303,10 +307,12 @@ const translations = {
     footer_cookie_policy: 'कुकी धोरण',
     footer_tagline: 'सुलभ शिक्षण, प्रगत AI मूल्यमापन आणि वैयक्तिक अंतर्दृष्टीद्वारे अनुवांशिक जागरूकता सशक्त करणे.',
     footer_copyright: '© 2026 GeneGuard. सर्व हक्क राखीव.',
+    login: 'लॉगिन',
+    signup: 'साइन अप',
   },
 
   // ── తెలుగు (Telugu) ──────────────────────────────────────────────────────────
-  tel: {
+  te: {
     nav_counselling: 'కౌన్సెలింగ్',
     hero_title: 'అర్థం చేసుకోవడానికి మీ ప్రయాణం',
     hero_title_accent: 'జన్యు ఆరోగ్యం',
@@ -404,11 +410,13 @@ const translations = {
     footer_cookie_policy: 'కుకీ విధానం',
     footer_tagline: 'అందుబాటులో ఉన్న విద్య, అధునాతన AI మూల్యాంకనం మరియు వ్యక్తిగతీకరించిన అంతర్దృష్టుల ద్వారా జన్యు అవగాహనను శక్తివంతం చేయడం.',
     footer_copyright: '© 2026 GeneGuard. అన్ని హక్కులు రిజర్వ్ చేయబడ్డాయి.',
+    login: 'లాగిన్',
+    signup: 'సైన్ అప్',
   }
 };
 
 export default function Counselling() {
-  const [language, setLanguage] = useState('eng');
+  const [language, setLanguage] = useState('en');
   const [activeScenario, setActiveScenario] = useState(null);
   const [bookingStep, setBookingStep] = useState(1);
   const [selectedConcern, setSelectedConcern] = useState('');
@@ -554,31 +562,31 @@ export default function Counselling() {
           
           <div className="dna-nav-right-section">
             <div className="dna-nav-links">
-              <Link to="/learn-genetics" className="dna-nav-link">Learn Genetics</Link>
-              <Link to="/genetic-disorders" className="dna-nav-link">Genetic Disorders</Link>
-              <Link to="/counselling" className="dna-nav-link active">Counselling</Link>
-              <Link to="/genetic-assessment" className="dna-nav-link">Genetic Assessment AI</Link>
-              <Link to="/dna" className="dna-nav-link">DNA Testing</Link>
-              <Link to="/about" className="dna-nav-link">About Us</Link>
+              <Link to="/learn-genetics" className="dna-nav-link">{t('footer_learn_genetics')}</Link>
+              <Link to="/genetic-disorders" className="dna-nav-link">{t('footer_genetic_disorders')}</Link>
+              <Link to="/counselling" className="dna-nav-link active">{t('nav_counselling')}</Link>
+              <Link to="/genetic-assessment" className="dna-nav-link">{t('footer_ai_assessment')}</Link>
+              <Link to="/dna" className="dna-nav-link">{t('footer_dna_testing')}</Link>
+              <Link to="/about" className="dna-nav-link">{t('footer_about_us')}</Link>
             </div>
 
             {/* Language Buttons */}
             <div className="dna-language-buttons">
               <button 
-                className={`dna-lang-btn ${language === 'eng' ? 'active' : ''}`}
-                onClick={() => setLanguage('eng')}
+                className={`dna-lang-btn ${language === 'en' ? 'active' : ''}`}
+                onClick={() => setLanguage('en')}
               >EN</button>
               <button 
-                className={`dna-lang-btn ${language === 'hin' ? 'active' : ''}`}
-                onClick={() => setLanguage('hin')}
+                className={`dna-lang-btn ${language === 'hi' ? 'active' : ''}`}
+                onClick={() => setLanguage('hi')}
               >हिं</button>
               <button 
-                className={`dna-lang-btn ${language === 'mar' ? 'active' : ''}`}
-                onClick={() => setLanguage('mar')}
+                className={`dna-lang-btn ${language === 'mr' ? 'active' : ''}`}
+                onClick={() => setLanguage('mr')}
               >मर</button>
               <button 
-                className={`dna-lang-btn ${language === 'tel' ? 'active' : ''}`}
-                onClick={() => setLanguage('tel')}
+                className={`dna-lang-btn ${language === 'te' ? 'active' : ''}`}
+                onClick={() => setLanguage('te')}
               >తె</button>
             </div>
 
@@ -606,8 +614,8 @@ export default function Counselling() {
               {isProfileOpen && (
                 <div className="dna-profile-dropdown">
                   <div className="dna-dropdown-glow"></div>
-                  <Link to="/login" className="dna-dropdown-item dna-signup-special">Login</Link>
-                  <Link to="/signup" className="dna-dropdown-item dna-signup-special">Sign Up</Link>
+                  <Link to="/login" className="dna-dropdown-item dna-signup-special">{t('login')}</Link>
+                  <Link to="/signup" className="dna-dropdown-item dna-signup-special">{t('signup')}</Link>
                 </div>
               )}
             </div>
@@ -617,12 +625,12 @@ export default function Counselling() {
 
       {isMobileMenuOpen && (
         <div className="dna-mobile-menu-overlay">
-          <Link to="/learn-genetics" className="dna-nav-link" onClick={handleLinkClick}>Learn Genetics</Link>
-          <Link to="/genetic-disorders" className="dna-nav-link" onClick={handleLinkClick}>Genetic Disorders</Link>
-          <Link to="/counselling" className="dna-nav-link active" onClick={handleLinkClick}>Counselling</Link>
-          <Link to="/genetic-assessment" className="dna-nav-link" onClick={handleLinkClick}>Genetic Assessment AI</Link>
-          <Link to="/dna" className="dna-nav-link" onClick={handleLinkClick}>DNA Testing</Link>
-          <Link to="/about" className="dna-nav-link" onClick={handleLinkClick}>About Us</Link>
+          <Link to="/learn-genetics" className="dna-nav-link" onClick={handleLinkClick}>{t('footer_learn_genetics')}</Link>
+          <Link to="/genetic-disorders" className="dna-nav-link" onClick={handleLinkClick}>{t('footer_genetic_disorders')}</Link>
+          <Link to="/counselling" className="dna-nav-link active" onClick={handleLinkClick}>{t('nav_counselling')}</Link>
+          <Link to="/genetic-assessment" className="dna-nav-link" onClick={handleLinkClick}>{t('footer_ai_assessment')}</Link>
+          <Link to="/dna" className="dna-nav-link" onClick={handleLinkClick}>{t('footer_dna_testing')}</Link>
+          <Link to="/about" className="dna-nav-link" onClick={handleLinkClick}>{t('footer_about_us')}</Link>
         </div>
       )}
 
@@ -925,27 +933,27 @@ export default function Counselling() {
                   <h4 className="footer-column-title">{t('footer_services')}</h4>
                   <ul className="footer-links">
                     <li><Link to="/dna">{t('footer_dna_testing')}</Link></li>
-                    <li><a href="#reports">{t('footer_reports_insights')}</a></li>
-                    <li><a href="#consultations">{t('footer_consultations')}</a></li>
-                    <li><a href="#research">{t('footer_research')}</a></li>
+                    <li><Link to="/genetic-assessment">{t('footer_reports_insights')}</Link></li>
+                    <li><Link to="/counselling">{t('footer_consultations')}</Link></li>
+                    <li><Link to="/learn-genetics">{t('footer_research')}</Link></li>
                   </ul>
                 </div>
                 <div className="footer-column">
                   <h4 className="footer-column-title">{t('footer_company')}</h4>
                   <ul className="footer-links">
                     <li><Link to="/about">{t('footer_about_us')}</Link></li>
-                    <li><a href="#team">{t('footer_our_team')}</a></li>
-                    <li><a href="#careers">{t('footer_careers')}</a></li>
-                    <li><a href="#contact">{t('footer_contact')}</a></li>
+                    <li><Link to="/about">{t('footer_our_team')}</Link></li>
+                    <li><Link to="/about">{t('footer_careers')}</Link></li>
+                    <li><Link to="/about">{t('footer_contact')}</Link></li>
                   </ul>
                 </div>
                 <div className="footer-column">
                   <h4 className="footer-column-title">{t('footer_legal')}</h4>
                   <ul className="footer-links">
-                    <li><a href="#privacy">{t('footer_privacy_policy')}</a></li>
-                    <li><a href="#terms">{t('footer_terms_of_service')}</a></li>
-                    <li><a href="#hipaa">{t('footer_hipaa_compliance')}</a></li>
-                    <li><a href="#cookies">{t('footer_cookie_policy')}</a></li>
+                    <li><Link to="/about">{t('footer_privacy_policy')}</Link></li>
+                    <li><Link to="/about">{t('footer_terms_of_service')}</Link></li>
+                    <li><Link to="/dna">{t('footer_hipaa_compliance')}</Link></li>
+                    <li><Link to="/about">{t('footer_cookie_policy')}</Link></li>
                   </ul>
                 </div>
               </div>

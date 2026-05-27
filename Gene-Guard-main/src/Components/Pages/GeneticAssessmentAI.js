@@ -407,7 +407,7 @@ const GeneticAssessmentAI = () => {
               <Link to="/learn-genetics" className="home-nav-link">{t.navLinks.learnGenetics}</Link>
               <Link to="/genetic-disorders" className="home-nav-link">{t.navLinks.geneticDisorders}</Link>
               <Link to="/counselling" className="home-nav-link">{t.navLinks.counselling}</Link>
-              <Link to="/genetic-assessment" className="home-nav-link">{t.navLinks.geneticAssessment}</Link>
+              <Link to="/genetic-assessment" className="home-nav-link active">{t.navLinks.geneticAssessment}</Link>
               <Link to="/dna" className="home-nav-link">{t.navLinks.dnaTesting}</Link>
               <Link to="/about" className="home-nav-link">{t.navLinks.aboutUs}</Link>
             </div>
@@ -455,9 +455,9 @@ const GeneticAssessmentAI = () => {
         <div className="home-mobile-menu-overlay">
           <Link to="/learn-genetics" className="home-nav-link" onClick={handleLinkClick}>{t.navLinks.learnGenetics}</Link>
           <Link to="/genetic-disorders" className="home-nav-link" onClick={handleLinkClick}>{t.navLinks.geneticDisorders}</Link>
-          <Link to="/genetic-counseling" className="home-nav-link" onClick={handleLinkClick}>{t.navLinks.counselling}</Link>
-          <Link to="/genetic-assessment" className="home-nav-link" onClick={handleLinkClick}>{t.navLinks.geneticAssessment}</Link>
-          <Link to="/dna-testing" className="home-nav-link" onClick={handleLinkClick}>{t.navLinks.dnaTesting}</Link>
+          <Link to="/counselling" className="home-nav-link" onClick={handleLinkClick}>{t.navLinks.counselling}</Link>
+          <Link to="/genetic-assessment" className="home-nav-link active" onClick={handleLinkClick}>{t.navLinks.geneticAssessment}</Link>
+          <Link to="/dna" className="home-nav-link" onClick={handleLinkClick}>{t.navLinks.dnaTesting}</Link>
           <Link to="/about" className="home-nav-link" onClick={handleLinkClick}>{t.navLinks.aboutUs}</Link>
         </div>
       )}

@@ -252,27 +252,27 @@ const Footer = ({ t }) => {
               <h3 className="dna-footer-column-title">{t.footerServices}</h3>
               <ul className="dna-footer-links">
                 <li><Link to="/dna">{t.navLinks.dnaTesting}</Link></li>
-                <li><a href="#reports">Reports &amp; Insights</a></li>
-                <li><a href="#consultation">Consultations</a></li>
-                <li><a href="#research">Research</a></li>
+                <li><Link to="/genetic-assessment">Reports &amp; Insights</Link></li>
+                <li><Link to="/counselling">Consultations</Link></li>
+                <li><Link to="/learn-genetics">Research</Link></li>
               </ul>
             </div>
             <div className="dna-footer-column">
               <h3 className="dna-footer-column-title">{t.footerCompany}</h3>
               <ul className="dna-footer-links">
                 <li><Link to="/about">{t.navLinks.aboutUs}</Link></li>
-                <li><a href="#team">Our Team</a></li>
-                <li><a href="#careers">Careers</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li><Link to="/about">Our Team</Link></li>
+                <li><Link to="/about">Careers</Link></li>
+                <li><Link to="/about">Contact</Link></li>
               </ul>
             </div>
             <div className="dna-footer-column">
               <h3 className="dna-footer-column-title">{t.footerLegal}</h3>
               <ul className="dna-footer-links">
-                <li><a href="#privacy">Privacy Policy</a></li>
-                <li><a href="#terms">Terms of Service</a></li>
-                <li><a href="#hipaa">HIPAA Compliance</a></li>
-                <li><a href="#cookies">Cookie Policy</a></li>
+                <li><Link to="/about">Privacy Policy</Link></li>
+                <li><Link to="/about">Terms of Service</Link></li>
+                <li><Link to="/dna">HIPAA Compliance</Link></li>
+                <li><Link to="/about">Cookie Policy</Link></li>
               </ul>
             </div>
           </div>

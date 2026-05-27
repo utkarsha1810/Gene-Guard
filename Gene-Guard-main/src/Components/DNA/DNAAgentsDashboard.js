@@ -2,7 +2,6 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import './DNAAgentsDashboard.css';
 
-const LazyEscalationMap = React.lazy(() => import('./EscalationMap'));
 import {
   buildOpenMapUrl,
   buildSmsUrl,
@@ -16,6 +15,8 @@ import {
 } from '../../data/dnaAgents';
 import { callGeminiDirect, isGeminiAvailable } from '../../services/geminiDirectService';
 import { parseMarkdown } from '../../utils/formatters';
+
+const LazyEscalationMap = React.lazy(() => import('./EscalationMap'));
 
 const API_BASE = 'http://localhost:5050/api/dna';
 

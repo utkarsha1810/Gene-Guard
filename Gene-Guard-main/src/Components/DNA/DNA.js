@@ -667,27 +667,27 @@ const Footer = ({ t }) => {
               <h3 className="dna-footer-column-title">{t.footer.services}</h3>
               <ul className="dna-footer-links">
                 <li><Link to="/dna">{t.footer.servicesLinks[0]}</Link></li>
-                <li><a href="#reports">{t.footer.servicesLinks[1]}</a></li>
-                <li><a href="#consultation">{t.footer.servicesLinks[2]}</a></li>
-                <li><a href="#research">{t.footer.servicesLinks[3]}</a></li>
+                <li><Link to="/genetic-assessment">{t.footer.servicesLinks[1]}</Link></li>
+                <li><Link to="/counselling">{t.footer.servicesLinks[2]}</Link></li>
+                <li><Link to="/learn-genetics">{t.footer.servicesLinks[3]}</Link></li>
               </ul>
             </div>
             <div className="dna-footer-column">
               <h3 className="dna-footer-column-title">{t.footer.company}</h3>
               <ul className="dna-footer-links">
                 <li><Link to="/about">{t.footer.companyLinks[0]}</Link></li>
-                <li><a href="#team">{t.footer.companyLinks[1]}</a></li>
-                <li><a href="#careers">{t.footer.companyLinks[2]}</a></li>
-                <li><a href="#contact">{t.footer.companyLinks[3]}</a></li>
+                <li><Link to="/about">{t.footer.companyLinks[1]}</Link></li>
+                <li><Link to="/about">{t.footer.companyLinks[2]}</Link></li>
+                <li><Link to="/about">{t.footer.companyLinks[3]}</Link></li>
               </ul>
             </div>
             <div className="dna-footer-column">
               <h3 className="dna-footer-column-title">{t.footer.legal}</h3>
               <ul className="dna-footer-links">
-                <li><a href="#privacy">{t.footer.legalLinks[0]}</a></li>
-                <li><a href="#terms">{t.footer.legalLinks[1]}</a></li>
-                <li><a href="#hipaa">{t.footer.legalLinks[2]}</a></li>
-                <li><a href="#cookies">{t.footer.legalLinks[3]}</a></li>
+                <li><Link to="/about">{t.footer.legalLinks[0]}</Link></li>
+                <li><Link to="/about">{t.footer.legalLinks[1]}</Link></li>
+                <li><Link to="/dna">{t.footer.legalLinks[2]}</Link></li>
+                <li><Link to="/about">{t.footer.legalLinks[3]}</Link></li>
               </ul>
             </div>
           </div>
