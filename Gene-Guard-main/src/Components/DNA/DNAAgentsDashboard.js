@@ -116,7 +116,7 @@ const RotatingLoader = () => {
   return (
     <div className="dna-empty-state">
       <div className="dna-empty-state-icon loader-pulse">⏳</div>
-      <h3>{messages[index]}</h3>
+      <h3>{rotatingLoaderMessages[index]}</h3>
       <p>This usually takes a few seconds.</p>
     </div>
   );
