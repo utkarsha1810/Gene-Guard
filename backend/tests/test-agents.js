@@ -2,7 +2,7 @@
  * Test script for all 6 DNA agents with Claude enhancement
  */
 
-const BASE_URL = 'http://localhost:5050/api/dna';
+const BASE_URL = process.env.API_BASE_URL || 'http://localhost:5050/api/dna';
 
 // Test patient profile
 const testPatient = {

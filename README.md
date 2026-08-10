@@ -1,296 +1,213 @@
-# 🧬 Gene-Guard: AI-Powered DNA Testing Platform
+# 🧬 Gene-Guard
 
 A comprehensive, AI-enhanced platform for DNA testing guidance using **Gemini AI** and **MongoDB**. Helps patients understand genetic findings, choose appropriate tests, and receive personalized guidance through 6 intelligent agents.
 
----
+## ✨ Features
 
-## 🚀 **Quick Start**
+- **6 AI-Powered DNA Agents** — Guidance, Test Suggestion, Sample Process, Report Simplifier, Recommendation, and Escalation
+- **Gemini AI Integration** — Real-time AI-enhanced analysis with rule-based fallback
+- **Patient Profile Management** — Rich intake forms with live risk evaluation
+- **Interactive Dashboard** — Dynamic charts, risk trends, and emergency action controls
+- **Dark/Light Mode** — Full theme support across the agent dashboard
+- **Emergency Escalation** — Interactive map, call/SMS actions, and alert system
 
-### Prerequisites
-- **Node.js** v20+
-- **MongoDB** running locally (`mongodb://localhost:27017`)
-- **Gemini API Key** from [Google Cloud Console](https://console.cloud.google.com/)
+## 📋 Prerequisites
 
-### Setup
+- **Node.js** v18+ and **npm**
+- **MongoDB** running locally (`mongodb://localhost:27017`) or a MongoDB Atlas connection string
+- **Gemini API Key** from [Google AI Studio](https://aistudio.google.com/apikey)
 
-**1. Clone and install dependencies:**
+## 🚀 Getting Started
+
+### 1. Clone the repository
+
 ```bash
-# Backend
-cd Gene-Guard-agents-v3/backend
-npm install
-
-# Frontend
-cd ../Gene-Guard-main  # or 'frontend' after rename
-npm install
+git clone https://github.com/utkarsha1810/Gene-Guard.git
+cd Gene-Guard
 ```
 
-**2. Set environment variables:**
+### 2. Backend Setup
 
-**Backend** (`.env`):
+```bash
+cd backend
+npm install
+cp .env.example .env
+```
+
+Edit `backend/.env` and fill in your values:
+
 ```env
-MONGODB_URI=mongodb://localhost:27017/gene-guard
 GEMINI_API_KEY=your_gemini_api_key_here
 PORT=5050
 NODE_ENV=development
+MONGODB_URI=mongodb://localhost:27017/gene-guard
 ```
 
-**Frontend** (`.env.local`):
+Start the backend:
+
+```bash
+npm start
+```
+
+The backend will run at `http://localhost:5050`.
+
+### 3. Frontend Setup (Gene-Guard-main — CRA)
+
+```bash
+cd Gene-Guard-main
+npm install
+cp .env.example .env
+```
+
+Edit `Gene-Guard-main/.env`:
+
 ```env
+REACT_APP_GEMINI_API_KEY=your_gemini_api_key_here
 REACT_APP_API_URL=http://localhost:5050/api
 ```
 
-**3. Start services:**
+Start the frontend:
+
 ```bash
-# Terminal 1: Backend (port 5050)
-cd backend && npm start
-
-# Terminal 2: Frontend (port 3000)
-cd frontend && npm start
+npm start
 ```
 
-**4. Open browser:**
-```
-http://localhost:3000
+The frontend will run at `http://localhost:3000`.
+
+### 4. Frontend Setup (frontend/ — Vite)
+
+```bash
+cd frontend
+npm install
+cp .env.example .env
 ```
 
----
+Edit `frontend/.env`:
 
-## 🧠 **The 6 DNA Agents**
+```env
+VITE_API_URL=http://localhost:5050/api
+```
+
+Start the dev server:
+
+```bash
+npm run dev
+```
+
+## 🏗️ Project Structure
+
+```
+Gene-Guard/
+├── backend/                     # Express.js API server
+│   ├── config/
+│   │   ├── database.js          # MongoDB connection
+│   │   └── systemPrompts.js     # AI agent system prompts
+│   ├── middleware/
+│   │   └── inputValidation.js   # Request validation & filtering
+│   ├── models/                  # MongoDB schemas
+│   │   ├── DNATest.js
+│   │   ├── Patient.js
+│   │   └── TestResult.js
+│   ├── routes/
+│   │   ├── dnaAgents.js         # All 6 DNA agent endpoints
+│   │   ├── health.js            # Health check & config
+│   │   └── patients.js          # Patient CRUD
+│   ├── services/
+│   │   └── geminiService.js     # Google Gemini integration
+│   ├── tests/                   # Agent test scripts
+│   ├── utils/                   # Logger, rate limiter
+│   ├── server.js                # Main server entry point
+│   ├── .env.example             # Environment template
+│   └── package.json
+│
+├── Gene-Guard-main/             # React frontend (CRA)
+│   ├── src/
+│   │   ├── Components/          # UI components
+│   │   ├── data/                # Agent configs & logic
+│   │   ├── services/            # API client & Gemini service
+│   │   └── utils/               # Constants & formatters
+│   ├── .env.example             # Environment template
+│   └── package.json
+│
+├── frontend/                    # React frontend (alternative)
+│   ├── src/
+│   │   ├── components/          # UI components
+│   │   ├── data/                # Agent configs
+│   │   └── services/            # API & Gemini client
+│   ├── .env.example             # Environment template
+│   └── package.json
+│
+├── .gitignore
+└── README.md
+```
+
+## 🤖 DNA Agents
 
 Each agent uses **Gemini AI** with fallback to intelligent rule-based logic:
 
-| Agent | Purpose | Input | Output |
-|-------|---------|-------|--------|
-| **Report Simplifier** | Explains genetic findings | Clinical report + gene name | Plain-language explanation |
-| **Recommendation** | Suggests next steps | Risk level + patient profile | Personalized action plan |
-| **Guidance** | Helps choose testing pathway | Age, symptoms, family history | Recommended testing path |
-| **Test Suggestion** | Recommends specific tests | Goals + urgency + history | Best test + rationale |
-| **Sample Process** | Guides collection | Test type + preferences | Step-by-step collection guide |
-| **Escalation** | Assesses urgency | Risk level + symptoms | Follow-up timeline + alerts |
+| Agent | Purpose |
+|-------|---------|
+| 🧭 **Guidance Agent** | Recommends a DNA testing pathway based on patient profile |
+| 🔬 **Test Suggestion Agent** | Suggests the most suitable DNA test category |
+| 🧪 **Sample Process Agent** | Guides sample collection method and precautions |
+| 📋 **Report Simplifier Agent** | Translates clinical findings to patient-friendly language |
+| 💡 **Recommendation Agent** | Advises on practical next steps after results |
+| 🚨 **Escalation Agent** | Assesses urgency and escalation level with emergency actions |
 
----
+## 🔌 API Endpoints
 
-## 📁 **Project Structure**
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| `GET` | `/health` | Service health check |
+| `GET` | `/api/dna/configs` | Get agent configurations |
+| `POST` | `/api/dna/run/:agentId` | Run a specific DNA agent |
+| `POST` | `/api/dna/patient/evaluate` | Evaluate patient risk profile |
+| `POST` | `/api/dna/simplify-report-ai` | Direct report simplification |
 
-```
-Gene-Guard-agents-v3/
-│
-├── backend/
-│   ├── config/
-│   │   ├── database.js          # MongoDB connection
-│   │   └── systemPrompts.js     # AI agent prompts
-│   ├── models/                  # MongoDB schemas
-│   │   ├── Patient.js
-│   │   ├── DNATest.js
-│   │   └── TestResult.js
-│   ├── services/
-│   │   ├── geminiService.js     # Google Gemini integration
-│   │   ├── claudeService.js     # Claude backup
-│   │   └── databaseService.js   # MongoDB CRUD
-│   ├── middleware/
-│   │   └── inputValidation.js   # Input validation + XSS prevention
-│   ├── routes/
-│   │   ├── dnaAgents.js         # All 6 agent endpoints
-│   │   ├── health.js            # Health check endpoints
-│   │   └── patients.js          # Patient routes (Phase 4)
-│   ├── utils/
-│   │   ├── logger.js            # Logging utility
-│   │   └── rateLimiter.js       # Rate limiting
-│   ├── tests/
-│   │   ├── test-agents.js       # Test all agents
-│   │   ├── test-gemini.js       # Test Gemini
-│   │   └── test-claude.js       # Test Claude
-│   ├── server.js                # Main Express app (217 lines)
-│   └── package.json
-│
-├── frontend/  (formerly Gene-Guard-main)
-│   ├── src/
-│   │   ├── components/
-│   │   │   ├── Auth/            # Login, Register
-│   │   │   ├── DNA/             # Agent dashboard, intake
-│   │   │   ├── Pages/           # Home, About, Learn, etc.
-│   │   │   ├── Layout/          # Header, Footer (future)
-│   │   │   └── Images/          # Profile images
-│   │   ├── services/
-│   │   │   └── apiClient.js     # Centralized API calls
-│   │   ├── hooks/               # Custom React hooks (Phase 4)
-│   │   ├── utils/
-│   │   │   ├── constants.js     # App constants + agent IDs
-│   │   │   └── formatters.js    # Date, text formatting helpers
-│   │   ├── data/
-│   │   │   └── dnaAgents.js     # Agent configurations
-│   │   ├── App.js               # Main routing
-│   │   └── index.js
-│   └── package.json
-│
-├── ARCHITECTURE.md              # Detailed technical docs
-├── README.md                    # This file
-└── .gitignore
+## 🛡️ Environment Variables
 
+### Backend (`backend/.env`)
+
+| Variable | Required | Description |
+|----------|----------|-------------|
+| `GEMINI_API_KEY` | Yes | Google Gemini API key |
+| `PORT` | No | Server port (default: `5050`) |
+| `NODE_ENV` | No | Environment (default: `development`) |
+| `MONGODB_URI` | No | MongoDB connection string (default: `mongodb://localhost:27017/gene-guard`) |
+
+### Frontend — CRA (`Gene-Guard-main/.env`)
+
+| Variable | Required | Description |
+|----------|----------|-------------|
+| `REACT_APP_GEMINI_API_KEY` | No | Gemini key for direct frontend AI calls |
+| `REACT_APP_API_URL` | No | Backend API URL (default: `http://localhost:5050/api`) |
+
+### Frontend — Vite (`frontend/.env`)
+
+| Variable | Required | Description |
+|----------|----------|-------------|
+| `VITE_API_URL` | No | Backend API URL (default: `http://localhost:5050/api`) |
+
+## 🧪 Running Tests
+
+```bash
+cd backend
+node tests/test-agents.js
 ```
 
----
+> **Note:** The backend server must be running before executing tests.
 
-## 📊 **Data Flow**
-
-```
-User Form (React)
-      ↓
-API Request to Backend
-      ↓
-Validation & Rate Limiting
-      ↓
-Save to MongoDB (Patient, DNATest)
-      ↓
-Call Gemini AI Agent
-      ↓
-(If Gemini fails → Fallback to rule-based)
-      ↓
-Save Result to MongoDB
-      ↓
-Return JSON to Frontend
-      ↓
-Display Results
-```
-
----
-
-## 🔌 **API Endpoints**
-
-### Health & Config
-- `GET /health` - Service health check
-- `GET /api/dna/configs` - All agent configurations
-
-### Agent Execution
-- `POST /api/dna/run/:agentId` - Run specific agent
-  - Path: `:agentId` = `report-simplifier-agent`, `recommendation-agent`, etc.
-  - Body: `{formData: {...}, patient: {...}}`
-
-### Patient
-- `POST /api/dna/patient/evaluate` - Evaluate patient profile
-- `POST /api/dna/simplify-report-ai` - Direct report simplification
-
----
-
-## 💾 **Database Collections**
-
-### Patients
-```javascript
-{
-  _id: ObjectId,
-  email: String,
-  firstName: String,
-  lastName: String,
-  age: Number,
-  sex: String,
-  bloodGroup: String,
-  familyHistory: String,
-  knownDisorder: String,
-  currentSymptoms: String,
-  emergencyContact: String,
-  location: String,
-  createdAt: Date,
-  updatedAt: Date
-}
-```
-
-### DNATests
-```javascript
-{
-  _id: ObjectId,
-  patientId: ObjectId,
-  testType: String,
-  samplePreference: String,
-  urgency: String,
-  status: String,  // pending, completed
-  createdAt: Date
-}
-```
-
-### TestResults
-```javascript
-{
-  _id: ObjectId,
-  testId: ObjectId,
-  patientId: ObjectId,
-  agentId: String,
-  aiResponse: String,
-  riskLevel: String,
-  aiModel: String,  // "gemini" or "rule-based"
-  processingTime: Number,
-  createdAt: Date
-}
-```
-
----
-
-## 🛡️ **Security Features**
-
-- ✅ Input validation & sanitization
-- ✅ XSS prevention
-- ✅ Rate limiting (5000 calls/24h per session)
-- ✅ Medical safety guardrails in AI prompts
-- ✅ No diagnosis language in outputs
-- ✅ All inputs logged for audit trail
-
----
-
-## 📈 **Roadmap**
-
-- **Phase 1** ✅ MongoDB + Gemini integration
-- **Phase 2** ✅ Frontend reorganization
-- **Phase 3** 🔄 Documentation (WIP)
-- **Phase 4** 📅 Patient authentication & history
-- **Phase 5** 📅 Advanced analytics dashboard
-- **Phase 6** 📅 Mobile app
-
----
-
-## 🔧 **Tech Stack**
-
-### Backend
-- **Express.js** - Web framework
-- **MongoDB** + **Mongoose** - Database
-- **Google Gemini 2.5 Flash** - AI engine
-- **Node.js** - Runtime
-
-### Frontend
-- **React** - UI framework
-- **React Router** - Navigation
-- **Axios** (via apiClient) - HTTP client
-- **CSS** - Styling
-
----
-
-## 📝 **License**
-
-Gene-Guard is open source under the MIT License.
-
----
-
-## ❓ **FAQ**
+## ❓ FAQ
 
 **Q: What if Gemini API fails?**
-A: Automatic fallback to intelligent rule-based logic. Users won't notice interruption.
+A: All agents automatically fall back to intelligent rule-based logic. The app remains fully functional without AI.
 
-**Q: Is this medical diagnosis?**
-A: No. All outputs include disclaimers: "This is educational guidance only. Consult a healthcare provider."
+**Q: Can I use MongoDB Atlas instead of local MongoDB?**
+A: Yes. Set `MONGODB_URI` in your `.env` to your Atlas connection string.
 
-**Q: How much does Gemini cost?**
-A: ~$0 (free tier). 60 calls/minute limit. Perfect for development/testing.
+**Q: Is an internet connection required?**
+A: MongoDB can be local. Gemini requires internet, but the rule-based fallback works offline.
 
-**Q: Can I use this offline?**
-A: Yes, mostly. MongoDB can be local. Gemini requires internet, but rule-based fallback works offline.
+## 📝 License
 
----
-
-## 💬 **Support**
-
-For issues, questions, or suggestions:
-- Check [ARCHITECTURE.md](./ARCHITECTURE.md) for technical details
-- Review backend logs: `npm start`
-- Test agents directly: `node backend/tests/test-agents.js`
-
----
-
-**Built with ❤️ for genetic literacy and patient empowerment.**
+MIT

@@ -27,7 +27,7 @@ const patientDefaults = {
   emergencyContact: '',
 };
 
-const API_BASE = 'http://localhost:5050/api/dna';
+const API_BASE = (import.meta.env.VITE_API_URL || 'http://localhost:5050/api') + '/dna';
 
 const MiniMetric = ({ label, value }) => (
   <div className="patient-metric-mini">
