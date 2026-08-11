@@ -74,7 +74,7 @@ npm start
 
 The frontend will run at `http://localhost:3000`.
 
-### 4. Frontend Setup (frontend/ — Vite)
+### 4. Frontend Setup (frontend/ — CRA)
 
 ```bash
 cd frontend
@@ -85,13 +85,13 @@ cp .env.example .env
 Edit `frontend/.env`:
 
 ```env
-VITE_API_URL=http://localhost:5050/api
+REACT_APP_API_URL=http://localhost:5050/api
 ```
 
 Start the dev server:
 
 ```bash
-npm run dev
+npm start
 ```
 
 ## 🏗️ Project Structure
@@ -129,7 +129,7 @@ Gene-Guard/
 │   ├── .env.example             # Environment template
 │   └── package.json
 │
-├── frontend/                    # React frontend (alternative)
+├── frontend/                    # React frontend (CRA)
 │   ├── src/
 │   │   ├── components/          # UI components
 │   │   ├── data/                # Agent configs
@@ -175,18 +175,12 @@ Each agent uses **Gemini AI** with fallback to intelligent rule-based logic:
 | `NODE_ENV` | No | Environment (default: `development`) |
 | `MONGODB_URI` | No | MongoDB connection string (default: `mongodb://localhost:27017/gene-guard`) |
 
-### Frontend — CRA (`Gene-Guard-main/.env`)
+### Frontend — CRA (`frontend/.env`)
 
 | Variable | Required | Description |
 |----------|----------|-------------|
 | `REACT_APP_GEMINI_API_KEY` | No | Gemini key for direct frontend AI calls |
 | `REACT_APP_API_URL` | No | Backend API URL (default: `http://localhost:5050/api`) |
-
-### Frontend — Vite (`frontend/.env`)
-
-| Variable | Required | Description |
-|----------|----------|-------------|
-| `VITE_API_URL` | No | Backend API URL (default: `http://localhost:5050/api`) |
 
 ## 🧪 Running Tests
 
